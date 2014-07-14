@@ -25,7 +25,7 @@ namespace Ruminate.GUI.Framework {
 
             NewState = OldState = new MouseState();
 
-            InputManager = new InputManager(game, Dom);
+            InputManager = new InputManager(Dom);
             RenderManager = new RenderManager(game.GraphicsDevice);
 
             SetDefaultSettings(game, defaultSkin, defaultText);
@@ -152,39 +152,42 @@ namespace Ruminate.GUI.Framework {
 
         public bool HasMouse { get { return InputManager.HoverWidget != null; } }
 
+        //KeyBoard
         public event CharEnteredHandler CharacterPress {
-            add { InputSystem.CharEntered += value; }
-            remove { InputSystem.CharEntered -= value; }
+            add { KeyboardEvents.KeyTyped += value; }
+            remove { KeyboardEvents.KeyTyped -= value; }
         }
 
         public event KeyEventHandler KeyDown {
-            add { InputSystem.KeyDown += value; }
-            remove { InputSystem.KeyDown -= value; }
+            add { KeyboardEvents.KeyPressed += value; }
+            remove { KeyboardEvents.KeyPressed -= value; }
         }
 
         public event KeyEventHandler KeyUp {
-            add { InputSystem.KeyUp += value; }
-            remove { InputSystem.KeyUp -= value; }
+            add { KeyboardEvents.KeyReleased += value; }
+            remove { KeyboardEvents.KeyReleased -= value; }
         }
 
+
+        //Mouse
         public event MouseEventHandler MouseDoubleClick {
-            add { InputSystem.MouseDoubleClick += value; }
-            remove { InputSystem.MouseDoubleClick -= value; }
+            add { MouseEvents.ButtonDoubleClicked += value; }
+            remove { MouseEvents.ButtonDoubleClicked -= value; }
         }
 
         public event MouseEventHandler MouseDown {
-            add { InputSystem.MouseDown += value; }
-            remove { InputSystem.MouseDown -= value; }
+            add { MouseEvents.ButtonPressed += value; }
+            remove { MouseEvents.ButtonPressed -= value; }
         }
 
         public event MouseEventHandler MouseUp {
-            add { InputSystem.MouseUp += value; }
-            remove { InputSystem.MouseUp -= value; }
+            add { MouseEvents.ButtonReleased += value; }
+            remove { MouseEvents.ButtonReleased -= value; }
         }
 
         public event MouseEventHandler MouseWheel {
-            add { InputSystem.MouseWheel += value; }
-            remove { InputSystem.MouseWheel -= value; }
+            add { MouseEvents.MouseWheelMoved += value; }
+            remove { MouseEvents.MouseWheelMoved -= value; }
         }
 
         #endregion
@@ -204,9 +207,11 @@ namespace Ruminate.GUI.Framework {
 
         internal MouseState NewState, OldState;
 
-        public void Update() {
+        public void Update(GameTime time) {            
 
             NewState = Mouse.GetState();
+
+            InputManager.Update(time, NewState);
 
             Dom.DfsOperationChildren(node => {
                 if (!node.Data.Active) return;

@@ -143,7 +143,6 @@ namespace Ruminate.GUI.Framework {
 
     public abstract class WidgetBase<T> : Widget where T : RenderRule
     {
-
         protected internal T RenderRule { get; set; }
 
         public override Rectangle Area { get; protected set; }
@@ -161,12 +160,14 @@ namespace Ruminate.GUI.Framework {
         public virtual string Text { set { RenderRule.Text = value; } }
 
         protected abstract T BuildRenderRule();
-        protected WidgetBase() {
+        protected WidgetBase() 
+        {
             RenderRule = BuildRenderRule();
         }
 
         protected abstract void Attach();
-        internal override void Prepare(Gui gui) {
+        internal override void Prepare(Gui gui)
+        {
 
             Owner = gui;
 
@@ -183,11 +184,19 @@ namespace Ruminate.GUI.Framework {
         }
 
         internal override void Layout() {
-            ClippingArea = Rectangle.Intersect(RenderRule.ClippingArea, Owner.RenderManager.GraphicsDevice.Viewport.Bounds);
+            ClippingArea = Rectangle.Intersect(
+                RenderRule.ClippingArea, 
+                Owner.RenderManager.GraphicsDevice.Viewport.Bounds);
         }
 
-        internal override void Draw() { RenderRule.Draw(); }
+        internal override void Draw()
+        {
+            RenderRule.Draw();
+        }
 
-        internal override void DrawNoClipping() { RenderRule.DrawNoClipping(); }
+        internal override void DrawNoClipping()
+        {
+            RenderRule.DrawNoClipping();
+        }
     }
 }

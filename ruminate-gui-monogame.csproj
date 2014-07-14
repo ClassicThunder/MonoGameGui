@@ -73,7 +73,25 @@
     <Compile Include="GuiUtils\RuntimeManager.cs" />
     <Compile Include="GuiUtils\TextureBaker.cs" />
     <Compile Include="Gui\InputManager.cs" />
-    <Compile Include="Gui\Input\WindowsHook.cs" />
+    <Compile Include="Gui\Input\Buttons.cs" />
+    <Compile Include="Gui\Input\CharacterEventArgs.cs" />
+    <Compile Include="Gui\Input\GamePadButtonEventArgs.cs" />
+    <Compile Include="Gui\Input\GamePadEventArgs.cs" />
+    <Compile Include="Gui\Input\GamePadEvents.cs" />
+    <Compile Include="Gui\Input\GamePadThumbstickEventArgs.cs" />
+    <Compile Include="Gui\Input\GamePadTriggerEventArgs.cs" />
+    <Compile Include="Gui\Input\InputEventArgs.cs" />
+    <Compile Include="Gui\Input\KeyboardEventArgs.cs" />
+    <Compile Include="Gui\Input\KeyboardEvents.cs" />
+    <Compile Include="Gui\Input\KeyboardUtil.cs" />
+    <Compile Include="Gui\Input\KeySequence.cs" />
+    <Compile Include="Gui\Input\Modifiers.cs" />
+    <Compile Include="Gui\Input\MouseButton.cs" />
+    <Compile Include="Gui\Input\MouseEventArgs.cs" />
+    <Compile Include="Gui\Input\MouseEvents.cs" />
+    <Compile Include="Gui\Input\PolarCoordinate.cs" />
+    <Compile Include="Gui\Input\Thumbsticks.cs" />
+    <Compile Include="Gui\Input\Triggers.cs" />
     <Compile Include="Gui\Utils\TreeNode.cs" />
     <Compile Include="Gui\Gui.cs" />
     <Compile Include="Gui\Layout\FontRenderRule.cs" />
@@ -89,11 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.1.2.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="OpenTK">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Lidgren.Network">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\Lidgren.Network.dll</HintPath>
@@ -105,9 +121,7 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="SDL.dll" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

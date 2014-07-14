@@ -112,7 +112,7 @@ namespace Ruminate.GUI.Content {
         }
 
         protected internal override void CharEntered(CharacterEventArgs e) {
-
+                     
             var ch = e.Character;
 
             lock (RenderRule) {
@@ -128,7 +128,7 @@ namespace Ruminate.GUI.Content {
                     } case '\n': case '\r': {
                         //New Line <= Insert character after cursor                        
                         if (RenderRule.HasSelected) { RenderRule.RemoveSelected(); }
-                        RenderRule.Insert(e.Character);
+                        RenderRule.Insert(ch);
                         break;                    
                     } case '\t': { 
                         //Tabs currently not supported
@@ -159,7 +159,7 @@ namespace Ruminate.GUI.Content {
                         if (RenderRule.HasSelected) {
                             RenderRule.RemoveSelected();
                         }
-                        RenderRule.Insert(e.Character);
+                        RenderRule.Insert(ch);
                         RenderRule.SelectedChar = null;
                         break;
                     }
@@ -217,7 +217,8 @@ namespace Ruminate.GUI.Content {
 
             lock (RenderRule) {                
                 if (RenderRule.Length != 0) {
-                    switch (e.KeyCode) {
+                    switch (e.KeyCode)
+                    {
                         case Keys.Left: {
                             RenderRule.TextCursor--;
                             RenderRule.SelectedChar = null;
