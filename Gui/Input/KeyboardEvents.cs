@@ -64,9 +64,15 @@ namespace Microsoft.Xna.Framework.Input
 
             // Build the modifiers that currently apply to the current situation.
             var modifiers = Modifiers.None;
-            if (current.IsKeyDown(Keys.LeftControl) || current.IsKeyDown(Keys.RightControl)) { modifiers |= Modifiers.Control; }
-            if (current.IsKeyDown(Keys.LeftShift) || current.IsKeyDown(Keys.RightShift)) { modifiers |= Modifiers.Shift; }
-            if (current.IsKeyDown(Keys.LeftAlt) || current.IsKeyDown(Keys.RightAlt)) { modifiers |= Modifiers.Alt; }
+            if (current.IsKeyDown(Keys.LeftControl) || current.IsKeyDown(Keys.RightControl)) {
+                modifiers |= Modifiers.Control;
+            }
+            if (current.IsKeyDown(Keys.LeftShift) || current.IsKeyDown(Keys.RightShift)) {
+                modifiers |= Modifiers.Shift;
+            }
+            if (current.IsKeyDown(Keys.LeftAlt) || current.IsKeyDown(Keys.RightAlt)) {
+                modifiers |= Modifiers.Alt;
+            }
             
             // Key pressed and initial key typed events for all keys.
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
@@ -74,7 +80,7 @@ namespace Microsoft.Xna.Framework.Input
                 if (current.IsKeyDown(key) && _previous.IsKeyUp(key))
                 {
                     OnKeyPressed(this, new KeyEventArgs(gameTime.TotalGameTime, key, modifiers, current));
-                    var ch = KeyboardUtil.ToChar(_lastKey);
+                    var ch = KeyboardUtil.ToChar(key, modifiers);
                     if (ch.HasValue) {
                         OnKeyTyped(this, new CharacterEventArgs(gameTime.TotalGameTime, ch.Value, modifiers, current));
                     }
@@ -102,7 +108,7 @@ namespace Microsoft.Xna.Framework.Input
                 && ((_isInitial && elapsedTime > InitialDelay) 
                 || (!_isInitial && elapsedTime > RepeatDelay)))
             {
-                var ch = KeyboardUtil.ToChar(_lastKey);
+                var ch = KeyboardUtil.ToChar(_lastKey, modifiers);
                 if (ch.HasValue) 
                 {
                     OnKeyTyped(this, new CharacterEventArgs(gameTime.TotalGameTime, ch.Value, modifiers, current));

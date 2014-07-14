@@ -69,7 +69,7 @@ namespace Ruminate.GUI.Framework {
 
             /* ## Input Events to Manage Internal State ## */
             #region Manage Internal State
-            MouseEvents.MouseDragged += delegate
+            MouseEvents.MouseMoved += delegate
             {
 
                 if (FocusedWidget != null
