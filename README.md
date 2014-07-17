@@ -6,7 +6,7 @@ This project is a GUI library for the MonoGame library.
 By: [Scott Franks](http://scott-franks.com/)
 
 ### Demonstration Project: ###
-There is a BitBucket repo https://bitbucket.org/ClassicThunder/ruminate-gui-example-monogame that contains an example project demonstrating how to set up and use the GUI. Each of the files in the screen folder demonstrate different capabilities and you can toggle though them when running the example project by pressing tab. 
+There is a BitBucket repo [here](https://bitbucket.org/ClassicThunder/ruminate-gui-example) that contains an example project demonstrating how to set up and use the GUI. Each of the files in the screen folder demonstrate different capabilities and you can toggle though them when running the example project by pressing tab. 
 
 ### Skinning System: ###
 Easily alter the look of the widgets to fit the theme of your project.
