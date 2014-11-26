@@ -3,6 +3,9 @@ using Ruminate.GUI.Framework;
 
 namespace Ruminate.GUI.Content {
 
+    /// <summary>
+    /// Uses corner, edge, and center to create pannel.
+    /// </summary>
     public class PanelRenderRule : RenderRule {
 
         private Rectangle _area;

@@ -1,16 +1,57 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Point = Microsoft.Xna.Framework.Point;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Ruminate.GUI.Framework {
 
-    abstract public class Renderer {
+    /// <summary>
+    /// Stateless rule used to create reusuable render code that converts an area
+    /// and skin into a graphic. 
+    /// </summary>
+    public abstract class Renderer {
 
-        protected Texture2D ImageMap { get; set; }
+        /*####################################################################*/
+        /*                            Properties                              */
+        /*####################################################################*/
 
-        protected Renderer(Texture2D imageMap) { ImageMap = imageMap; }
+        protected SpriteBatch SpriteBatch { get; set; }
 
-        abstract public Rectangle BuildChildArea(Point size);
-        abstract public void Render(SpriteBatch batch, Rectangle destination);
+        protected Skin Skin;
+
+        protected Rectangle
+            RenderRectangle,
+            SourceRectangle;
+
+        /*####################################################################*/
+        /*                             Functions                              */
+        /*####################################################################*/
+
+        protected Renderer(RenderManager renderManager) {
+
+            SpriteBatch = renderManager.SpriteBatch;
+            RenderRectangle = SourceRectangle = Rectangle.Empty;
+        }
+
+        public abstract void Draw(Skin skin, Rectangle area, ref Rectangle safeArea);
+
+        /*####################################################################*/
+        /*                              Helpers                               */
+        /*####################################################################*/
+
+        protected void LoadFromSkin(string name) {
+            SourceRectangle = Skin.Map[name];
+        }
+
+        protected void Render(SpriteEffects effects) {
+            SpriteBatch.Draw(
+                Skin.Texture, 
+                RenderRectangle, 
+                SourceRectangle,
+                Color.White,
+                0, 
+                Vector2.Zero, 
+                effects,
+                0);
+        }        
     }
 }

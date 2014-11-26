@@ -2,15 +2,24 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Ruminate.DataStructures;
+using Ruminate.GUI.Content;
 
 namespace Ruminate.GUI.Framework {
 
     public class RenderManager {
 
+        /*####################################################################*/
+        /*                            Render State                            */
+        /*####################################################################*/
+
         private RasterizerState RasterizerState { get; set; }
 
         public GraphicsDevice GraphicsDevice { get; private set; }
         public SpriteBatch SpriteBatch { get; private set; }
+
+        /*####################################################################*/
+        /*                             Skin Info                              */
+        /*####################################################################*/
 
         public string DefaultSkin { get; set; }
         public string DefaultText { get; set; }
@@ -18,8 +27,9 @@ namespace Ruminate.GUI.Framework {
         public Dictionary<string, Skin> Skins { get; private set; }
         public Dictionary<string, Text> Texts { get; private set; }
 
-        private DepthStencilState ApplyStencil { get; set; }
-        private DepthStencilState SampleStencil { get; set; }
+        /*####################################################################*/
+        /*                              Options                               */
+        /*####################################################################*/
 
         public Texture2D SelectionColor { get; set; }
         public Color HighlightingColor {
@@ -33,31 +43,36 @@ namespace Ruminate.GUI.Framework {
             }
         }
 
+        /*####################################################################*/
+        /*                             Renderers                              */
+        /*####################################################################*/
+
+        internal PanelRenderer PanelRenderer { get; private set; }
+        internal VerticalSlidingDoorRenderer VerticalSlidingDoorRenderer { get; private set; }
+        internal HorizontalSlidingDoorRenderer HorizontalSlidingDoorRenderer { get; private set; }
+        
+        private void BuildRenderers()
+        {
+            PanelRenderer = new PanelRenderer(this);
+            VerticalSlidingDoorRenderer = new VerticalSlidingDoorRenderer(this);
+            HorizontalSlidingDoorRenderer = new HorizontalSlidingDoorRenderer(this);
+        }
+
+        /*####################################################################*/
+        /*                           Initialization                           */
+        /*####################################################################*/
+
         internal RenderManager(GraphicsDevice device) {
 
             Skins = new Dictionary<string, Skin>();
             Texts = new Dictionary<string, Text>();
 
-            ApplyStencil = new DepthStencilState {
-                StencilEnable = true,
-                StencilFunction = CompareFunction.Always,
-                StencilPass = StencilOperation.Replace,
-                ReferenceStencil = 1,
-                DepthBufferEnable = false,
-            };
-
-            SampleStencil = new DepthStencilState {
-                StencilEnable = true,
-                StencilFunction = CompareFunction.Equal,
-                StencilPass = StencilOperation.Keep,
-                ReferenceStencil = 1,
-                DepthBufferEnable = false,
-            };
-
             GraphicsDevice = device;
             RasterizerState = new RasterizerState { ScissorTestEnable = true };
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-        }
+
+            BuildRenderers();
+        }        
 
         /*####################################################################*/
         /*                         State Management                           */

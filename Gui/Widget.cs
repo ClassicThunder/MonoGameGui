@@ -8,20 +8,25 @@ namespace Ruminate.GUI.Framework {
 
     public abstract class Widget : ITreeNode<Widget> {
 
+        // Link to Gui state
         protected Gui Owner { get; set; }
+        internal InputManager InputManager { get { return Owner.InputManager; } }
+        internal RenderManager RenderManager { get { return Owner.RenderManager; } }
 
-        internal InputManager InputManager { get; set; }
-
-        //Location
+        // Location
         public abstract Rectangle Area { get; protected set; }
-        public abstract Rectangle AbsoluteArea { get; set; }
+        public abstract Rectangle SafeArea { get; protected set; }
 
-        internal abstract Rectangle AbsoluteInputArea { get; }
+        // Location calculated by layout system
+        internal Rectangle AbsoluteArea { get; set; }
+        internal Rectangle AbsoluteSafeArea { get; set; }
+
+        internal Rectangle AbsoluteInputArea { get; set; }
 
         internal Rectangle SissorArea { get; set; }
         internal Rectangle ClippingArea { get; set; }        
 
-        //Dom management
+        // Dom management
         private TreeNode<Widget> TreeNode { get; set;}
         public TreeNode<Widget> GetTreeNode() {
             return TreeNode;
@@ -74,9 +79,7 @@ namespace Ruminate.GUI.Framework {
         internal protected bool BlocksInput { get; set; }
 
         public bool IsPressed { get { return InputManager.PressedWidget == this; } }
-
         public bool IsFocused { get { return InputManager.FocusedWidget == this; } }
-
         public bool IsHover { get { return InputManager.HoverWidget == this; } }
 
         #region Events
@@ -117,7 +120,7 @@ namespace Ruminate.GUI.Framework {
         #region Flow
 
         /*####################################################################*/
-        /*                                Flow                                */
+        /*                                Logic                               */
         /*####################################################################*/
 
         protected Widget() {
@@ -130,8 +133,7 @@ namespace Ruminate.GUI.Framework {
             BlocksInput = false;
         }
 
-        internal abstract void Prepare(Gui gui);
-        internal abstract void Layout();
+        protected abstract void Attach();
 
         protected internal abstract void Update();
 
@@ -139,64 +141,5 @@ namespace Ruminate.GUI.Framework {
         internal abstract void DrawNoClipping();
 
         #endregion        
-    }
-
-    public abstract class WidgetBase<T> : Widget where T : RenderRule
-    {
-        protected internal T RenderRule { get; set; }
-
-        public override Rectangle Area { get; protected set; }
-
-        public override Rectangle AbsoluteArea {
-            get { return RenderRule.Area; }
-            set { RenderRule.Area = value; }
-        }
-
-        internal override Rectangle AbsoluteInputArea {
-            get { return RenderRule.SafeArea; }
-        }
-
-        public virtual string Skin { set { RenderRule.Skin = value; } }
-        public virtual string Text { set { RenderRule.Text = value; } }
-
-        protected abstract T BuildRenderRule();
-        protected WidgetBase() 
-        {
-            RenderRule = BuildRenderRule();
-        }
-
-        protected abstract void Attach();
-        internal override void Prepare(Gui gui)
-        {
-
-            Owner = gui;
-
-            SissorArea = gui.RenderManager.GraphicsDevice.Viewport.Bounds;
-            ClippingArea = gui.RenderManager.GraphicsDevice.Viewport.Bounds;
-
-            InputManager = gui.InputManager;
-
-            RenderRule.RenderManager = gui.RenderManager;
-            RenderRule.Load();
-
-            Attach();
-            Resize();
-        }
-
-        internal override void Layout() {
-            ClippingArea = Rectangle.Intersect(
-                RenderRule.ClippingArea, 
-                Owner.RenderManager.GraphicsDevice.Viewport.Bounds);
-        }
-
-        internal override void Draw()
-        {
-            RenderRule.Draw();
-        }
-
-        internal override void DrawNoClipping()
-        {
-            RenderRule.DrawNoClipping();
-        }
     }
 }

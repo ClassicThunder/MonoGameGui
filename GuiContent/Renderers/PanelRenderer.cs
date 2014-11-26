@@ -1,13 +1,19 @@
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Ruminate.GUI.Framework;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
-namespace Ruminate.GUI.Content {
+namespace Ruminate.GUI.Content
+{
+    public class PanelRenderer : Renderer {
 
-    public class IconRenderer : Renderer {
+        private const string 
+            Corner = "PanelCorner",
+            EdgeLeft = "PanelEdgeLeft",
+            EdgeTop = "PanelEdgeTop",
+            BackGround = "PanelCenter";
 
-        public IconRenderer(RenderManager renderManager) : base(renderManager) { }
+        public PanelRenderer(RenderManager renderManager) : base(renderManager) { }
 
         public override void Draw(Skin skin, Rectangle area, ref Rectangle safeArea) {
 

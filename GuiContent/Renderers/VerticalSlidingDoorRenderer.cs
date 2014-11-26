@@ -1,45 +1,52 @@
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Point = Microsoft.Xna.Framework.Point;
+using Ruminate.GUI.Framework;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Ruminate.GUI.Content {
 
-// ReSharper disable ClassNeverInstantiated.Global
-    public class VerticalSlidingDoorRenderer : SlidingDoorRenderer {
-// ReSharper restore ClassNeverInstantiated.Global
+    public class VerticalSlidingDoorRenderer : Renderer {
 
-        private readonly Rectangle _center, _edge;
-        private readonly int _buffer;
+        private const string
+            Edge = "VSDEdge",
+            Center = "VSDCenter";
 
-        public override int Across { get { return _edge.Width; } }
-        public override int Lenght { get { return _center.Height; } }
-        public override int Edge { get { return _edge.Height; } }
-        public override int Buffer { get { return _buffer; } }
+        public VerticalSlidingDoorRenderer(RenderManager renderManager) : base(renderManager) { }
 
-        public VerticalSlidingDoorRenderer(Texture2D imageMap, Rectangle source, int center, int edge, int buffer)
-            : base(imageMap) {
+        public override void Draw(Skin skin, Rectangle area, ref Rectangle safeArea) {
 
-            _center = new Rectangle(source.Left, source.Top, source.Width, center);
-            _edge = new Rectangle(source.Left, source.Top + center, source.Width, edge);
-            _buffer = buffer;
-        }
+            Skin = skin;
 
-        public override Rectangle BuildChildArea(Point size) { 
-            return Rectangle.Empty;
-        }
+            var edgeWidth = skin.Map[Edge].Width;
+            var edgeHeight = skin.Map[Edge].Height;
 
-        public override void Render(SpriteBatch batch, Rectangle destination) {
+            // ##### Top Edge ##### //
 
-            var drawArea = new Rectangle(destination.Right - _edge.Width, destination.Top, _edge.Width, _edge.Height);
-            batch.Draw(ImageMap, drawArea, _edge, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically, 0.0f);
+            LoadFromSkin(Edge);
 
-            drawArea.Y = destination.Bottom - _edge.Height;
-            batch.Draw(ImageMap, drawArea, _edge, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0.0f);
+            RenderRectangle.X = area.Left;
+            RenderRectangle.Y = area.Top;
+            RenderRectangle.Width = edgeWidth;
+            RenderRectangle.Height = edgeHeight;
 
-            drawArea.Y = destination.Top + _edge.Height;
-            drawArea.Height = destination.Height - (2 * _edge.Height);
-            batch.Draw(ImageMap, drawArea, _center, Color.White, 0.0f, Vector2.Zero, SpriteEffects.FlipHorizontally, 0.0f);
+            Render(SpriteEffects.None);
+
+            // ##### Center ##### //
+
+            LoadFromSkin(Center);
+
+            RenderRectangle.Y = area.Top + edgeHeight;
+            RenderRectangle.Height = area.Width - (2 * edgeHeight);
+
+            Render(SpriteEffects.None);
+
+            // ##### Buttom Edge ##### //
+
+            LoadFromSkin(Edge);
+
+            RenderRectangle.Y = area.Bottom - edgeHeight;
+            RenderRectangle.Height = edgeHeight;
+
+            Render(SpriteEffects.FlipVertically);
         }
     }
 }
