@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace Ruminate.DataStructures {
+namespace Ruminate {
 
-    public delegate void NodeOperation<T>(TreeNode<T> node) where T : class;
-
-    public interface ITreeNode<T> where T : class {
-        TreeNode<T> GetTreeNode();
+    internal interface ITreeNode<T> where T : class {
+        TreeNode<T> TreeNode { get; }
     }
 
-    public class Root<T> : TreeNode<T> where T : class {
+    internal delegate void NodeOperation<T>(TreeNode<T> node) where T : class;
+
+    internal class Root<T> : TreeNode<T> where T : class {
 
         public NodeOperation<T> OnAttachedToRoot { get; set; }
         public NodeOperation<T> OnChildrenChanged { get; set; }
@@ -16,7 +16,7 @@ namespace Ruminate.DataStructures {
         public Root() : base(null) { Root = this; }
     }
 
-    public class TreeNode<T> where T : class {
+    internal class TreeNode<T> where T : class {
 
         public T Data { get; set; }
 
@@ -40,8 +40,8 @@ namespace Ruminate.DataStructures {
 
         // Add/Remove via Data
         public void AddChild(ITreeNode<T> data) {
-            
-            AddChild(data.GetTreeNode());
+
+            AddChild(data.TreeNode);
 
             if (IsRoot) {
                 DfsOperationChildren(node => Root.OnChildrenChanged(node));
@@ -53,7 +53,7 @@ namespace Ruminate.DataStructures {
         public void AddChildren(IEnumerable<ITreeNode<T>> children) {
             
             foreach (var child in children) {
-                AddChild(child.GetTreeNode());
+                AddChild(child.TreeNode);
             }
 
             if (IsRoot) {
@@ -79,7 +79,7 @@ namespace Ruminate.DataStructures {
         }
 
         // Add/Remove via TreeNode
-        private void AddChild(TreeNode<T> child) {
+        public void AddChild(TreeNode<T> child) {
 
             child.Parent = this;            
             Children.Add(child);
@@ -88,9 +88,22 @@ namespace Ruminate.DataStructures {
 
             child.Root = Root;
             Root.OnAttachedToRoot(this);
-        }        
+        }
 
-        private void RemoveChild(TreeNode<T> child) {
+        public void AddChildren(IEnumerable<TreeNode<T>> children) {
+
+            foreach (var child in children) {
+                AddChild(child);
+            }
+
+            if (IsRoot) {
+                DfsOperationChildren(node => Root.OnChildrenChanged(node));
+            } else if (Attached) {
+                DfsOperation(node => Root.OnChildrenChanged(node));
+            }
+        }
+
+        public void RemoveChild(TreeNode<T> child) {
 
             if (child.Parent != this || !Children.Contains(child)) { return; }
 

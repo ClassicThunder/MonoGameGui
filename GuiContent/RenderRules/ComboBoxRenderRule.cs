@@ -14,7 +14,7 @@ namespace Ruminate.GUI.Content {
                 return _direction;
             } set {
                 _direction = value;
-                if (RenderManager != null) { LoadRenderers(); }
+                if (RenderController != null) { LoadRenderers(); }
             }
         }
 
@@ -137,32 +137,32 @@ namespace Ruminate.GUI.Content {
 
             _dropDownRender = LoadRenderer<IconRenderer>(Skin, "drop_down");
 
-            _textRenderer = RenderManager.Texts[RenderManager.DefaultText];
+            _textRenderer = RenderController.Texts[RenderController.DefaultText];
         }
 
         public override void Draw() {
 
             switch (Mode) {
                 case RenderMode.Default: {
-                    _default.Render(RenderManager.SpriteBatch, Area);
+                    _default.Render(RenderController.SpriteBatch, Area);
                     break;
                 } case RenderMode.Hover: {
-                    _hover.Render(RenderManager.SpriteBatch, Area);
+                    _hover.Render(RenderController.SpriteBatch, Area);
                     break;
                 } case RenderMode.Pressed: {
-                    _pressed.Render(RenderManager.SpriteBatch, Area);
+                    _pressed.Render(RenderController.SpriteBatch, Area);
                     break;
                 }
             }
 
             _textRenderer.Render(
-                RenderManager.SpriteBatch,
+                RenderController.SpriteBatch,
                 Label,
                 _textArea,
                 TextHorizontal.LeftAligned,
                 TextVertical.CenterAligned);
 
-            _dropDownRender.Render(RenderManager.SpriteBatch, _dropDownIconArea);
+            _dropDownRender.Render(RenderController.SpriteBatch, _dropDownIconArea);
         }
 
         public override void DrawNoClipping() {
@@ -191,14 +191,14 @@ namespace Ruminate.GUI.Content {
             var t = false;
             foreach (var item in Items) {
                 if (count == HighlightItem) {
-                    _dropDownHover.Render(RenderManager.SpriteBatch, _temp);
+                    _dropDownHover.Render(RenderController.SpriteBatch, _temp);
                 } else if (t) {
-                    _dropDownDark.Render(RenderManager.SpriteBatch, _temp);
+                    _dropDownDark.Render(RenderController.SpriteBatch, _temp);
                 } else {
-                    _dropDownLight.Render(RenderManager.SpriteBatch, _temp);
+                    _dropDownLight.Render(RenderController.SpriteBatch, _temp);
                 }
 
-                _textRenderer.Render(RenderManager.SpriteBatch, item.Item2, _text, TextHorizontal.LeftAligned, TextVertical.CenterAligned);
+                _textRenderer.Render(RenderController.SpriteBatch, item.Item2, _text, TextHorizontal.LeftAligned, TextVertical.CenterAligned);
 
                 switch (OpenDirection) {
                     case CardinalDirection.North:{

@@ -41,13 +41,13 @@ namespace Ruminate.GUI.Content {
         public override void Draw() {            
 
             if (Label != null) {                
-                TextRenderer.Render(RenderManager.SpriteBatch, Label, _area,
+                TextRenderer.Render(RenderController.SpriteBatch, Label, _area,
                     TextHorizontal.RightAligned,
                     TextVertical.CenterAligned);
             }
 
             if (Image != null) {
-                RenderManager.SpriteBatch.Draw(Image, _icon, Color.White);
+                RenderController.SpriteBatch.Draw(Image, _icon, Color.White);
             }
         }
 

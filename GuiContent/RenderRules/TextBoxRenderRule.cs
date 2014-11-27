@@ -39,8 +39,8 @@ namespace Ruminate.GUI.Content {
         }
 
         public override void Draw() {
-            if (RenderedText != null) { RenderManager.SpriteBatch.Draw(RenderedText, Area, Color.White); }
-            if (CursorVisible) { RenderCursor(RenderManager.SpriteBatch, Area); }
+            if (RenderedText != null) { RenderController.SpriteBatch.Draw(RenderedText, Area, Color.White); }
+            if (CursorVisible) { RenderCursor(RenderController.SpriteBatch, Area); }
             RenderSelection(Area);
         }
 
@@ -462,14 +462,14 @@ namespace Ruminate.GUI.Content {
                 rectangle.Y = _charY[i] + renderArea.Y;
                 rectangle.Width = _charWidth[i];
 
-                RenderManager.SpriteBatch.Draw(RenderManager.SelectionColor, rectangle, Color.White);
+                RenderController.SpriteBatch.Draw(RenderController.SelectionColor, rectangle, Color.White);
             }
         }
 
         public void BakeText() {
 
             var textureBaker = new TextureBaker(
-                RenderManager.GraphicsDevice,
+                RenderController.GraphicsDevice,
                 Area.Width,
                 Area.Height,
                 TextureBaker.RenderState.Fill);

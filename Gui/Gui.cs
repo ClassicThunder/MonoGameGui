@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Ruminate.DataStructures;
 
 namespace Ruminate.GUI.Framework {
 
     public class Gui {
        
         // Internal System Managers
-        internal InputManager InputManager { get; private set; }
-        internal RenderManager RenderManager { get; private set; }
+        internal InputController InputController { get; private set; }
+        internal RenderController RenderManager { get; private set; }
 
         /*####################################################################*/
         /*                           Initialization                           */
@@ -25,8 +24,8 @@ namespace Ruminate.GUI.Framework {
 
             NewState = OldState = new MouseState();
 
-            InputManager = new InputManager(Dom);
-            RenderManager = new RenderManager(game.GraphicsDevice);
+            InputController = new InputController(Dom);
+            RenderManager = new RenderController(game.GraphicsDevice);
 
             SetDefaultSettings(game, defaultSkin, defaultText);
 
@@ -150,7 +149,7 @@ namespace Ruminate.GUI.Framework {
 
         #region Input
 
-        public bool HasMouse { get { return InputManager.HoverWidget != null; } }
+        public bool HasMouse { get { return InputController.HoverWidget != null; } }
 
         //KeyBoard
         public event CharEnteredHandler CharacterPress {
@@ -211,7 +210,7 @@ namespace Ruminate.GUI.Framework {
 
             NewState = Mouse.GetState();
 
-            InputManager.Update(time, NewState);
+            InputController.Update(time, NewState);
 
             Dom.DfsOperationChildren(node => {
                 if (!node.Data.Active) return;

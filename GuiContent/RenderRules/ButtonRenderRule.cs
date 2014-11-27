@@ -39,26 +39,26 @@ namespace Ruminate.GUI.Content {
             _hover = LoadRenderer<SlidingDoorRenderer>(Skin, "button_hover");
             _pressed = LoadRenderer<SlidingDoorRenderer>(Skin, "button_pushed");
 
-            _textRenderer = RenderManager.Texts[Text];
+            _textRenderer = RenderController.Texts[Text];
         }
 
         public override void Draw() {
 
             switch (Mode) {
                 case RenderMode.Default: {
-                    _default.Render(RenderManager.SpriteBatch, Area);
+                    _default.Render(RenderController.SpriteBatch, Area);
                     break;
                 } case RenderMode.Hover: {
-                    _hover.Render(RenderManager.SpriteBatch, Area);
+                    _hover.Render(RenderController.SpriteBatch, Area);
                     break;
                 } case RenderMode.Pressed: {
-                    _pressed.Render(RenderManager.SpriteBatch, Area);
+                    _pressed.Render(RenderController.SpriteBatch, Area);
                     break;
                 }
             }
 
             _textRenderer.Render(
-                RenderManager.SpriteBatch,
+                RenderController.SpriteBatch,
                 Label,
                 Area,
                 TextHorizontal.CenterAligned,

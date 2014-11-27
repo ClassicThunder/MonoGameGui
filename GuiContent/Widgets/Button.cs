@@ -4,7 +4,7 @@ using Ruminate.GUI.Framework;
 
 namespace Ruminate.GUI.Content {
 
-    public sealed class Button : WidgetBase<ButtonRenderRule> {
+    public sealed class Button : Widget {
 
         /*####################################################################*/
         /*                               Variables                            */
@@ -16,7 +16,8 @@ namespace Ruminate.GUI.Content {
         public string Label {
             get {
                 return RenderRule.Label;
-            } set {
+            }
+            set {
                 RenderRule.Label = value;
 
                 if (RenderRule.Loaded) { Resize(); }
@@ -30,7 +31,8 @@ namespace Ruminate.GUI.Content {
         public int? TextPadding {
             get {
                 return _textPadding;
-            } set {
+            }
+            set {
                 _textPadding = value;
                 _width = null;
 
@@ -45,7 +47,8 @@ namespace Ruminate.GUI.Content {
         public int? Width {
             get {
                 return _width;
-            } set {
+            }
+            set {
                 _width = value;
                 _textPadding = null;
 
@@ -100,7 +103,7 @@ namespace Ruminate.GUI.Content {
             Width = width;
             ClickEvent = buttonEvent;
             Label = label;
-        }        
+        }
 
         protected override void Attach() { }
 
@@ -134,8 +137,8 @@ namespace Ruminate.GUI.Content {
         }
 
         protected internal override void ExitPressed() {
-            RenderRule.Mode = IsHover 
-                ? ButtonRenderRule.RenderMode.Hover 
+            RenderRule.Mode = IsHover
+                ? ButtonRenderRule.RenderMode.Hover
                 : ButtonRenderRule.RenderMode.Default;
         }
 

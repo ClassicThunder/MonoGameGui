@@ -1,13 +1,12 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Ruminate.DataStructures;
 
 namespace Ruminate.GUI.Framework {
 
     // Handles/triggers all of the mouse or keyboard events. State management occurs 
     // asynchronously while triggers are handled synchronously.
-    internal class InputManager
+    internal class InputController
     {
         private MouseEvents _mouseEvents;
         private KeyboardEvents _keyboardEvents;
@@ -58,7 +57,7 @@ namespace Ruminate.GUI.Framework {
         // Ties into the events in InputSystem. Top events are asynchronous and 
         // used for state management. The rest of them are synchronous and used to
         // trigger user specified event handlers.
-        internal InputManager(Root<Widget> dom) {
+        internal InputController(Root<Widget> dom) {
 
             _dom = dom;
 

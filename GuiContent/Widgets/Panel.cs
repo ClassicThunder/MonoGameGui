@@ -18,7 +18,7 @@ namespace Ruminate.GUI.Content {
 
         protected override void Attach() {
 
-            PanelRenderer = new PanelRenderer(RenderManager);
+            PanelRenderer = new PanelRenderer(RenderController);
         }
 
         /*####################################################################*/

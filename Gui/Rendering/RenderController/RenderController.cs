@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Ruminate.DataStructures;
 using Ruminate.GUI.Content;
 
 namespace Ruminate.GUI.Framework {
 
-    public class RenderManager {
+    public class RenderController {
 
         /*####################################################################*/
         /*                            Render State                            */
@@ -62,7 +61,7 @@ namespace Ruminate.GUI.Framework {
         /*                           Initialization                           */
         /*####################################################################*/
 
-        internal RenderManager(GraphicsDevice device) {
+        internal RenderController(GraphicsDevice device) {
 
             Skins = new Dictionary<string, Skin>();
             Texts = new Dictionary<string, Text>();

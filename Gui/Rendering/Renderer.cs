@@ -26,7 +26,7 @@ namespace Ruminate.GUI.Framework {
         /*                             Functions                              */
         /*####################################################################*/
 
-        protected Renderer(RenderManager renderManager) {
+        protected Renderer(RenderController renderManager) {
 
             SpriteBatch = renderManager.SpriteBatch;
             RenderRectangle = SourceRectangle = Rectangle.Empty;

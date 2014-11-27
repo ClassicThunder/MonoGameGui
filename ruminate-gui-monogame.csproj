@@ -39,18 +39,18 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GuiContent\Elements\Button.cs" />
-    <Compile Include="GuiContent\Elements\CheckBox.cs" />
-    <Compile Include="GuiContent\Elements\ComboBox.cs" />
-    <Compile Include="GuiContent\Elements\Image.cs" />
-    <Compile Include="GuiContent\Elements\Label.cs" />
-    <Compile Include="GuiContent\Elements\Panel.cs" />
-    <Compile Include="GuiContent\Elements\RadioButton.cs" />
-    <Compile Include="GuiContent\Elements\ScrollBars.cs" />
-    <Compile Include="GuiContent\Elements\SingleLineTextBox.cs" />
-    <Compile Include="GuiContent\Elements\Slider.cs" />
-    <Compile Include="GuiContent\Elements\TextBox.cs" />
-    <Compile Include="GuiContent\Elements\ToggleButton.cs" />
+    <Compile Include="GuiContent\Widgets\Button.cs" />
+    <Compile Include="GuiContent\Widgets\CheckBox.cs" />
+    <Compile Include="GuiContent\Widgets\ComboBox.cs" />
+    <Compile Include="GuiContent\Widgets\Image.cs" />
+    <Compile Include="GuiContent\Widgets\Label.cs" />
+    <Compile Include="GuiContent\Widgets\Panel.cs" />
+    <Compile Include="GuiContent\Widgets\RadioButton.cs" />
+    <Compile Include="GuiContent\Widgets\ScrollBars.cs" />
+    <Compile Include="GuiContent\Widgets\SingleLineTextBox.cs" />
+    <Compile Include="GuiContent\Widgets\Slider.cs" />
+    <Compile Include="GuiContent\Widgets\TextBox.cs" />
+    <Compile Include="GuiContent\Widgets\ToggleButton.cs" />
     <Compile Include="GuiContent\Renderers\PanelRenderer.cs" />
     <Compile Include="GuiContent\Renderers\HorizontalSlidingDoorRenderer.cs" />
     <Compile Include="GuiContent\Renderers\IconRenderer.cs" />
@@ -70,9 +70,11 @@
     <Compile Include="GuiUtils\PngLoader.cs" />
     <Compile Include="GuiUtils\RuntimeManager.cs" />
     <Compile Include="GuiUtils\TextureBaker.cs" />
-    <Compile Include="Gui\InputManager.cs" />
+    <Compile Include="Gui\Input\Controller\InputInterface.cs" />
+    <Compile Include="Gui\Input\Controller\InputController.cs" />
     <Compile Include="Gui\Input\Buttons.cs" />
     <Compile Include="Gui\Input\CharacterEventArgs.cs" />
+    <Compile Include="Gui\Input\Controller\InputData.cs" />
     <Compile Include="Gui\Input\GamePadButtonEventArgs.cs" />
     <Compile Include="Gui\Input\GamePadEventArgs.cs" />
     <Compile Include="Gui\Input\GamePadEvents.cs" />
@@ -93,17 +95,18 @@
     <Compile Include="Gui\Rendering\Skin.cs" />
     <Compile Include="Gui\Rendering\SkinCache.cs" />
     <Compile Include="Gui\Rendering\Source.cs" />
-    <Compile Include="Gui\Utils\TreeNode.cs" />
+    <Compile Include="Gui\Widget\Widget.cs" />
+    <Compile Include="Gui\Widget\TreeNode.cs" />
     <Compile Include="Gui\Gui.cs" />
-    <Compile Include="Gui\Layout\FontRenderRule.cs" />
-    <Compile Include="Gui\Layout\LayoutData.cs" />
-    <Compile Include="Gui\Misc.cs" />
+    <Compile Include="GuiContent\RenderRules\FontRenderRule.cs" />
+    <Compile Include="Gui\Widget\LayoutData.cs" />
+    <Compile Include="Gui\EnumsAndDelegates.cs" />
     <Compile Include="Gui\Rendering\Renderer.cs" />
-    <Compile Include="Gui\Rendering\RenderManager.cs" />
+    <Compile Include="Gui\Rendering\RenderController\RenderController.cs" />
     <Compile Include="Gui\Rendering\SpriteSheetPacker.cs" />
     <Compile Include="Gui\Rendering\TextRenderer.cs" />
-    <Compile Include="Gui\Utils\Pin.cs" />
-    <Compile Include="Gui\Widget.cs" />
+    <Compile Include="GuiUtils\Pin.cs" />
+    <Compile Include="Gui\Widget\WidgetBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

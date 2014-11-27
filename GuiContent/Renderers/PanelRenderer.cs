@@ -13,7 +13,7 @@ namespace Ruminate.GUI.Content
             EdgeTop = "PanelEdgeTop",
             BackGround = "PanelCenter";
 
-        public PanelRenderer(RenderManager renderManager) : base(renderManager) { }
+        public PanelRenderer(RenderController renderManager) : base(renderManager) { }
 
         public override void Draw(Skin skin, Rectangle area, ref Rectangle safeArea) {
 

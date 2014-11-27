@@ -10,7 +10,7 @@ namespace Ruminate.GUI.Framework {
         public override void Load() {
             if (Skin == null) { Skin = DefaultSkin; }
             if (Text == null) { Text = DefaultText; }
-            TextRenderer = RenderManager.Texts[Text];
+            TextRenderer = RenderController.Texts[Text];
             LoadRenderers();
             Loaded = true;
         } 

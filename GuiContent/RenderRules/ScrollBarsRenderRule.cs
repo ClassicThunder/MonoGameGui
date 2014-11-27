@@ -73,8 +73,8 @@ namespace Ruminate.GUI.Content {
 
         protected override void LoadRenderers() {
 
-            Horizontal.SetRenderManager(RenderManager);
-            Vertical.SetRenderManager(RenderManager);
+            Horizontal.SetRenderManager(RenderController);
+            Vertical.SetRenderManager(RenderController);
 
             Horizontal.Load();
             Vertical.Load();

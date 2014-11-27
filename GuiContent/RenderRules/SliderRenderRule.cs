@@ -84,10 +84,10 @@ namespace Ruminate.GUI.Content {
 
             _selectedSliderArea.Width = _travel;
 
-            _slider.Render(RenderManager.SpriteBatch, _sliderArea);
-            _selectedSlider.Render(RenderManager.SpriteBatch, _selectedSliderArea);
+            _slider.Render(RenderController.SpriteBatch, _sliderArea);
+            _selectedSlider.Render(RenderController.SpriteBatch, _selectedSliderArea);
             _gripArea.X = Area.X + Travel;
-            _grip.Render(RenderManager.SpriteBatch, GripArea);
+            _grip.Render(RenderController.SpriteBatch, GripArea);
         }
 
         public override void DrawNoClipping() { }

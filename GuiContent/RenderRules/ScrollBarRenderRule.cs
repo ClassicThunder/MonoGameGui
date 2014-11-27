@@ -30,14 +30,14 @@ namespace Ruminate.GUI.Content {
 
         public abstract void CalculateRatio(Rectangle renderArea);
 
-        public void SetRenderManager(RenderManager manager) {
-            RenderManager = manager;
+        public void SetRenderManager(RenderController manager) {
+            RenderController = manager;
         }
 
         public override void Draw() {
             
-            Holder.Render(RenderManager.SpriteBatch, HolderArea);
-            Bar.Render(RenderManager.SpriteBatch, BarArea);
+            Holder.Render(RenderController.SpriteBatch, HolderArea);
+            Bar.Render(RenderController.SpriteBatch, BarArea);
         }
 
         public override void DrawNoClipping() { }

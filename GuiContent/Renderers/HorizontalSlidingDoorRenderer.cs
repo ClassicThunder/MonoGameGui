@@ -10,7 +10,7 @@ namespace Ruminate.GUI.Content {
             Edge = "HSDEdge",
             Center = "HSDCenter";
 
-        public HorizontalSlidingDoorRenderer(RenderManager renderManager) : base(renderManager) { }
+        public HorizontalSlidingDoorRenderer(RenderController renderManager) : base(renderManager) { }
 
         public override void Draw(Skin skin, Rectangle area, ref Rectangle safeArea) {
 

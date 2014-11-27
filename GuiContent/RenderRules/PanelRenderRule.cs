@@ -43,7 +43,7 @@ namespace Ruminate.GUI.Content {
         }
 
         public override void Draw() {
-            _default.Render(RenderManager.SpriteBatch, Area);
+            _default.Render(RenderController.SpriteBatch, Area);
         }
 
         public override void DrawNoClipping() { }
